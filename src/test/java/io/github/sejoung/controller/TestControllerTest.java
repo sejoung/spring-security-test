@@ -28,12 +28,13 @@ class TestControllerTest {
 
     @DisplayName("인증실패")
     @Test
-    void test() throws Exception {
+    void forbiddenTest() throws Exception {
         this.mockMvc.perform(get(URL)
             .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
             .andDo(print()).andExpect(status().isForbidden());
     }
 
+    @DisplayName("WithMockUser 어너테이션 테스트")
     @WithMockUser
     @Test
     void withMockTest() throws Exception {
@@ -42,6 +43,7 @@ class TestControllerTest {
             .andDo(print()).andExpect(status().isOk());
     }
 
+    @DisplayName("커스텀 어너테이션 테스트")
     @WithMockCustomUser
     @Test
     void customWithMockTest() throws Exception {
