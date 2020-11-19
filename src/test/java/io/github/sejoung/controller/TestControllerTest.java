@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import io.github.sejoung.test.util.WithMockCustomUser;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,14 @@ class TestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @DisplayName("인증실패")
+    @Test
+    void test() throws Exception {
+        this.mockMvc.perform(get(URL)
+            .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+            .andDo(print()).andExpect(status().isForbidden());
+    }
 
     @WithMockUser
     @Test
